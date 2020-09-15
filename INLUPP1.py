@@ -12,6 +12,10 @@ class ATM:
         # Load accounts from file if available
         self.load_files()
 
+        # transaction types
+        self.type_withdrawal = "uttag"
+        self.type_deposit = "ins"
+
     def main_menu(self):
         """ Runs main loop and display main menu """
         
@@ -85,7 +89,7 @@ class ATM:
                 deposit_amount = float(input("Ange belopp>"))
                 if deposit_amount > 0:
                     active_account.deposit(deposit_amount)
-                    active_account.add_transaction(deposit_amount, "ins")
+                    active_account.add_transaction(deposit_amount, self.type_deposit)
                     return
                 else:
                     print("belopped måste vara större än 0")
@@ -98,7 +102,7 @@ class ATM:
                 withdrawal_amount = float(input("Ange belopp>"))
                 if withdrawal_amount <= active_account.account_balance:
                     active_account.withdraw(withdrawal_amount)
-                    active_account.add_transaction(withdrawal_amount, "uttag")
+                    active_account.add_transaction(withdrawal_amount, self.type_withdrawal)
                     return
                 else:
                     print("belopped får inte vara större än saldot på kontot")
@@ -130,5 +134,7 @@ class ATM:
         except:
             print("Hittade inga kontofiler")
 
-atm = ATM()
-atm.main_menu()
+
+if __name__ == '__main__':
+    atm = ATM()
+    atm.main_menu()
