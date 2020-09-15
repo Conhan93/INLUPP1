@@ -1,6 +1,7 @@
 from datetime import date
 
 class Account:
+    """ Class to hold account information """
 
     def __init__(self, account_nr):
         
